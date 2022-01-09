@@ -36,25 +36,23 @@ export default function NavBar() {
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
-      <div className={classes.brandContainer}>
-        <Typography
-          component={Link}
-          to="/"
-          className={classes.heading}
-          variant="h3"
-          align="center"
-        >
-          Memories
-        </Typography>
+      <Link className={classes.brandContainer} to="/">
+        <img
+          src={
+            "https://raw.githubusercontent.com/adrianhajdin/project_mern_memories/PART_4/client/src/images/memoriesText.png"
+          }
+          alt="icon"
+          height="45px"
+        />
         <img
           className={classes.image}
           src={
-            "https://raw.githubusercontent.com/adrianhajdin/project_mern_memories/PART_3/client/src/images/memories.png"
+            "https://raw.githubusercontent.com/adrianhajdin/project_mern_memories/PART_4/client/src/images/memoriesLogo.png"
           }
           alt="icon"
           height="60"
         />
-      </div>
+      </Link>
       <Toolbar className={classes.toolbar}>
         {user ? (
           <div className={classes.profile}>
