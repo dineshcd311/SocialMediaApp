@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LOGOUT } from "../../constants/actionTypes";
 import { useHistory } from "react-router-dom";
+import decode from "jwt-decode";
 
 export default function NavBar() {
   const classes = useStyles();
@@ -13,14 +14,19 @@ export default function NavBar() {
   const history = useHistory();
   const location = useLocation();
 
+  useEffect(() => {
+    const token = user?.token;
 
-    useEffect(() => {
-      // const token = user?.token;
+    if (token) {
+      const decodedToken = decode(token);
 
-      //JWT
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        logout();
+      }
+    }
 
-      setUser(JSON.parse(localStorage.getItem("profile")));
-    }, [location]);
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
 
   const logout = () => {
     dispatch({ type: LOGOUT });
