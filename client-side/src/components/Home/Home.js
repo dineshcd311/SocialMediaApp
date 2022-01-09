@@ -33,10 +33,6 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
-
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
       searchPost();
