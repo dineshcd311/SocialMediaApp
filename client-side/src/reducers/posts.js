@@ -7,6 +7,7 @@ import {
   START_LOADING,
   END_LOADING,
   FETCH_BY_SEARCH,
+  FETCH_POST,
 } from "../constants/actionTypes";
 
 export default (
@@ -35,6 +36,12 @@ export default (
       return {
         ...state,
         posts: action.payload,
+      };
+
+    case FETCH_POST:
+      return {
+        ...state,
+        post: action.payload,
       };
 
     case LIKE:
