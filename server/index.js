@@ -21,35 +21,19 @@ app.get("/", (req, res) => {
   res.send("APP IS RUNNING");
 });
 
-app.use(function (req, res, next) {
-  res.status(404);
-
-  // respond with html page
-  if (req.accepts("html")) {
-    res.render("404", { url: req.url });
-    return;
-  }
-
-  // respond with json
-  if (req.accepts("json")) {
-    res.send({ error: "Not found" });
-    return;
-  }
-
-  // default to plain-text. send()
-  res.type("txt").send("Not found");
-});
-
 mongoose
   .connect(process.env.CONNECTION_URL, {
     useNewUrlParser: true,
+    useCreateIndex: true,
     useUnifiedTopology: true,
   })
-  .then(() =>
-    app.listen(PORT, () =>
-      console.log(`Server Running on Port: http://localhost:${PORT}`)
-    )
-  )
+  .then(() => {
+    console.log("Server connected to MongoDb!");
+  })
   .catch((error) => console.log(`${error} did not connect`));
+
+app.listen(PORT, () =>
+  console.log(`Server Running on Port: http://localhost:${PORT}`)
+);
 
 mongoose.set("useFindAndModify", false);

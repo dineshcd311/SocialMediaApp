@@ -14,17 +14,12 @@ export default function CommentSection({ post }) {
   const commentsRef = useRef();
 
   const handleClick = async () => {
-    console.log(`${user?.result?.name}: ${comment}`);
-    const newComments = await dispatch(
-      commentPost({ value: `${user?.result?.name}: ${comment}` }, post._id)
-    );
+    var value = { value: `${user?.result?.name}: ${comment}` };
     setComment("");
+    const newComments = await dispatch(commentPost(value, post._id));
     setComments(newComments);
-  };
-
-  useEffect(() => {
     commentsRef.current.scrollIntoView({ behavior: "smooth" });
-  }, [comments])
+  };
 
   return (
     <div>
@@ -32,17 +27,11 @@ export default function CommentSection({ post }) {
         <div className={classes.commentsInnerContainer}>
           <Typography gutterBottom variant="h6">
             {comments?.map((c, i) => (
-              <Typography
-                key={i}
-                gutterBottom
-                variant="subtitle1"
-                ref={commentsRef}
-              >
-                <strong>{c?.split(":")[0]}</strong>{" "}
-                {c?.split(":")[1]}
-
+              <Typography key={i} gutterBottom variant="subtitle1">
+                <strong>{c?.split(":")[0]}</strong> {c?.split(":")[1]}
               </Typography>
             ))}
+            <div ref={commentsRef} />
           </Typography>
         </div>
         {user?.result.name && (
