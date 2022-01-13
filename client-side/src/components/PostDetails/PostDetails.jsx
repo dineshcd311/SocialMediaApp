@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
 import { getPost, getPostsBySearch } from "../../actions/posts";
+import CommentSection from "./CommentSection";
 
 import useStyles from "./styles";
 
@@ -82,7 +83,7 @@ export default function PostDetails() {
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
           <Typography variant="body1">
-            <strong>Comments - coming soon!</strong>
+            <CommentSection post={post}/>
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
         </div>

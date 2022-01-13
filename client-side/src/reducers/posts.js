@@ -8,6 +8,7 @@ import {
   END_LOADING,
   FETCH_BY_SEARCH,
   FETCH_POST,
+  COMMENT,
 } from "../constants/actionTypes";
 
 export default (
@@ -50,6 +51,19 @@ export default (
         posts: state.posts.map((post) =>
           post._id === action.payload._id ? action.payload : post
         ),
+      };
+
+    case COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          //change the post that has comment included
+          if (post._id === action.payload._id) {
+            return action.payload;
+          } else {
+            return post;
+          }
+        }),
       };
 
     case CREATE:
